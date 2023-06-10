@@ -1,10 +1,23 @@
 package com.example.demo.repository.modelo;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+//genera la tabla 
+@Table(name = "estudiante")
+//cuando yo realizo el mapeo de un objeto pasa a ser una entidad
+@Entity
 public class Estudiante {
 
+	@Column(name = "estu_nombre")
 	private String nombre;
+	@Column(name = "estu_apellido")
 	private String apellido;
-	private String carrera;
+
+	@Id
+	@Column(name = "estu_cedula")
 	private String cedula;
 	public String getCedula() {
 		return cedula;
@@ -25,15 +38,11 @@ public class Estudiante {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-	public String getCarrera() {
-		return carrera;
-	}
-	public void setCarrera(String carrera) {
-		this.carrera = carrera;
-	}
 	@Override
 	public String toString() {
-		return "Estudiante [nombre=" + nombre + ", apellido=" + apellido + ", carrera=" + carrera + "]";
+		return "Estudiante [nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + "]";
 	}
+
+
 	
 }

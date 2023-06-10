@@ -25,12 +25,22 @@ public class Pa2U2P4AnApplication implements CommandLineRunner {
 	Estudiante estu1 = new Estudiante();
 	estu1.setApellido("narvaez");
 	estu1.setNombre("anthony");
-	estu1.setCarrera("computacion");
-	
+	estu1.setCedula("1719954370");
+	//this.estudianteService.agregar(estu1);
 	System.out.println(estu1);
-		
-		
-		
+	
+
+	
+	estu1.setNombre("josue");
+	
+	this.estudianteService.actualizar(estu1);
+	System.out.println(estu1);
+	
+	this.estudianteService.seleccionar("1719954370");
+	
+	this.estudianteService.borrar("1751457167");
+	
+
 	}
 
 }
