@@ -2,7 +2,10 @@ package com.example.demo.repository.modelo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 //genera la tabla 
@@ -10,15 +13,33 @@ import jakarta.persistence.Table;
 //cuando yo realizo el mapeo de un objeto pasa a ser una entidad
 @Entity
 public class Estudiante {
+	
+	//debo realizar un mapeo a mi columna principal 
+	//asignar un numero secuancial a una primary key ccomo un valor esta secuencia no vizualiza el usuario
+	//se usa para la integridad referencial de la BD
+	//debe tener 2 el nombre del generador el nnombre de la sequiencia el mismo del pgadmin y el crecimiento
+	@GeneratedValue(generator = "seq_estudiante", strategy = GenerationType.SEQUENCE ) /// atributo quue permite hacer match
+	@SequenceGenerator(name = "seq_estudiante", sequenceName = "seq_estudiante", allocationSize = 1)
+	@Id
+	@Column(name = "estu_id")
+	//este atributo no debe ser seteado
+	private Integer id;
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	@Column(name = "estu_cedula")
+	private String cedula;
 
 	@Column(name = "estu_nombre")
 	private String nombre;
 	@Column(name = "estu_apellido")
 	private String apellido;
 
-	@Id
-	@Column(name = "estu_cedula")
-	private String cedula;
+	
 	public String getCedula() {
 		return cedula;
 	}
@@ -40,8 +61,9 @@ public class Estudiante {
 	}
 	@Override
 	public String toString() {
-		return "Estudiante [nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + "]";
+		return "Estudiante [id=" + id + ", cedula=" + cedula + ", nombre=" + nombre + ", apellido=" + apellido + "]";
 	}
+	
 
 
 	
