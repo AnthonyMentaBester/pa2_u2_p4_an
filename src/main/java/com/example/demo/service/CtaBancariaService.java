@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import com.example.demo.repository.modelo.CtaBancaria;
 
 public interface CtaBancariaService {
-	public void aperturar(CtaBancaria ctabancaria, LocalDate fechaApertura, BigDecimal saldo);
-	public void actualizar(CtaBancaria ctabancaria);
-	public CtaBancaria consultar(String saldo);
+	public void aperturar(String cedula, String tipo, BigDecimal saldo);
+	public void actualizar(CtaBancaria ctabancaria,String id);
+	public CtaBancaria consultar(String id);
 
 }
