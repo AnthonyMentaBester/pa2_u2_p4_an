@@ -32,22 +32,21 @@ public class CtaBancariaServiceImpl implements CtaBancariaService {
 	@Override
 	public void aperturar( String cedula, String tipo, BigDecimal saldo) {
 		// TODO Auto-generated method stub
+		CtaBancaria  ctaO = this.bancariaRepository.seleccionar(cedula);
+		BigDecimal saldoOrigen = ctaO.getSaldo();
 		CtaBancaria  cta = new CtaBancaria();
-		cta.setFechaApertura(LocalDate.now());
-		cta.setCedulaPropietario("1719954370");
-		cta.setNumero("12");
-		cta.setTipo("A");
-		cta.setSaldo(saldo);
-		Integer numero = cta.getFechaApertura().getDayOfYear();
+		
+		Integer numero = cta.getFechaApertura().getDayOfMonth();
 		    if (numero % 2 == 0) {
+		    	BigDecimal saldoActual = this.paridadService.verParidad(saldo);
+		    	BigDecimal newSaldo = saldoOrigen.subtract(saldoActual);
+		    	ctaO.setSaldo(newSaldo);
+				cta.setFechaApertura(LocalDate.now());
+				cta.setCedulaPropietario("1719954370");
+				cta.setNumero("12");
+				cta.setTipo("A");
 		    	this.bancariaRepository.insertar(cta);
-		    	
-		    } else {
-		        System.out.println("felicidades");
 		    }
-		
-		
-		
 	}
 
 	@Override

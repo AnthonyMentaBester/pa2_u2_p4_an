@@ -9,6 +9,7 @@ public class ParidadImparService implements ParidadService{
 	@Override
 	public BigDecimal verParidad(BigDecimal monto) {
 		// TODO Auto-generated method stub
+		 System.out.println("felicidades");
 		return monto;
 	}
 
