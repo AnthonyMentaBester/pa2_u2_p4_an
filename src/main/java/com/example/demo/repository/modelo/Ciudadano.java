@@ -2,6 +2,7 @@ package com.example.demo.repository.modelo;
 
 import org.hibernate.annotations.OnDelete;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +32,7 @@ public class Ciudadano {
 	
 	//en la columna que esta representando la relacion 1 a 1 se pone
 	//en la tabla principal 
-	@OneToOne(mappedBy = "ciudadano")
+	@OneToOne(mappedBy = "ciudadano",cascade = CascadeType.ALL)
 	private Empleado empleado;
 	
 	
