@@ -2,6 +2,7 @@ package com.example.demo.repository.modelo;
 
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Autor {
 	@Column(name = "au_apellido")
 	private String apellido;
 	
-	@ManyToMany(mappedBy = "autores")
+	@ManyToMany(mappedBy = "autores", cascade = CascadeType.ALL)
 	//ponemos set porque trabajamos con copnjuntos
 	private Set<Libro> libros;
 	

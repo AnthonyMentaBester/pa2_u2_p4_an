@@ -3,7 +3,9 @@ package com.example.demo;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -11,18 +13,22 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.repository.modelo.Hotel;
+import com.example.demo.repository.modelo.Libro;
+import com.example.demo.repository.modelo.Autor;
 import com.example.demo.repository.modelo.Habitacion;
+import com.example.demo.service.AutorService;
 import com.example.demo.service.HabitacionService;
 import com.example.demo.service.HotelService;
+import com.example.demo.service.LibroService;
 
 @SpringBootApplication
 public class Pa2U2P4AnApplication implements CommandLineRunner {
 
 	@Autowired
-	private HabitacionService habitacionService;
+	private AutorService autorService;
 
 	@Autowired
-	private HotelService hotelService;
+	private LibroService libroService;
 
 	
 
@@ -33,31 +39,39 @@ public class Pa2U2P4AnApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Hotel hot = new Hotel();
-		hot.setNombre("Aton");
-		hot.setDireccion("lil street");
+		Set<Autor> autor = new HashSet<>();
+		Set<Libro> libros = new HashSet<>();
+		
+		Autor aut1 = new Autor();
+		aut1.setApellido("nunez");
+		aut1.setNombre("anthony");
+		
+		Autor aut2 = new Autor();
+		aut2.setApellido("numiro");
+		aut2.setNombre("carlos");
+		
+		Libro lib1 = new Libro();
+		lib1.setEditorial("hilos");
+		lib1.setTitulo("las granjas");
+		libros.add(lib1);
+		lib1.setAutores(autor);
 		
 		
-		List<Habitacion> habi = new ArrayList<>();
-        Habitacion hab1 = new Habitacion();
-	    hab1.setNumero("1719");
-		hab1.setValor(new BigDecimal(100));
-		habi.add(hab1);
-		hot.setHabitaciones(habi);	
+		Libro lib2 = new Libro();
+		lib2.setEditorial("sssew23s");
+		lib2.setTitulo("las monas");
+		libros.add(lib2);
+		lib2.setAutores(autor);
 		
-        Habitacion hab2 = new Habitacion();
-	    hab2.setNumero("1719");
-		hab2.setValor(new BigDecimal(200));
-		habi.add(hab2);
-		hot.setHabitaciones(habi);	
-		
-		hab1.setHotel(hot);
-		hab2.setHotel(hot);
+		this.autorService.actualizar(aut1);
+		this.autorService.agregar(aut2);
 		
 		
-		//this.habitacionService.agregar(hab1);
-		//this.habitacionService.agregar(hab2);
-		this.hotelService.agregar(hot);
+		
+		
+		
+		
+		
 	
 
 	}
