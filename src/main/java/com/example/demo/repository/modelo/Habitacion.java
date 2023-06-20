@@ -2,6 +2,7 @@ package com.example.demo.repository.modelo;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +30,7 @@ public class Habitacion {
 	@Column(name = "habi_valor")
 	private BigDecimal valor;
 	
-	@ManyToOne
+	@ManyToOne()
 	@JoinColumn(name = "habi_id_hotel")
 	private Hotel hotel;
 
