@@ -14,21 +14,23 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.repository.modelo.Hotel;
 import com.example.demo.repository.modelo.Libro;
+import com.example.demo.repository.modelo.Materia;
+import com.example.demo.repository.modelo.Matricula;
+import com.example.demo.repository.modelo.Alumno;
 import com.example.demo.repository.modelo.Autor;
 import com.example.demo.repository.modelo.Habitacion;
 import com.example.demo.service.AutorService;
 import com.example.demo.service.HabitacionService;
 import com.example.demo.service.HotelService;
 import com.example.demo.service.LibroService;
+import com.example.demo.service.MatriculaService;
 
 @SpringBootApplication
 public class Pa2U2P4AnApplication implements CommandLineRunner {
 
 	@Autowired
-	private AutorService autorService;
+	private MatriculaService matriculaService;
 
-	@Autowired
-	private LibroService libroService;
 
 	
 
@@ -39,39 +41,23 @@ public class Pa2U2P4AnApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
-		Set<Autor> autor = new HashSet<>();
-		Set<Libro> libros = new HashSet<>();
-		
-		Autor aut1 = new Autor();
-		aut1.setApellido("nunez");
-		aut1.setNombre("anthony");
-		
-		Autor aut2 = new Autor();
-		aut2.setApellido("numiro");
-		aut2.setNombre("carlos");
-		
-		Libro lib1 = new Libro();
-		lib1.setEditorial("hilos");
-		lib1.setTitulo("las granjas");
-		libros.add(lib1);
-		lib1.setAutores(autor);
+		List<Materia> materias = new ArrayList<>();
+		List<Alumno> alumnos = new ArrayList<>();
+		Materia mat = new Materia();
+		mat.setNombre("lenguaje");
+		materias.add(mat);
+		Alumno alum = new Alumno();
+		alum.setNombre("antohny");
+		alumnos.add(alum);
 		
 		
-		Libro lib2 = new Libro();
-		lib2.setEditorial("sssew23s");
-		lib2.setTitulo("las monas");
-		libros.add(lib2);
-		lib2.setAutores(autor);
+		Matricula matri = new Matricula();
+		matri.setFecha(LocalDate.now());
+		matri.setAlumno(alum);
+		matri.setMateria(mat);
+		matri.setNumero("001");
 		
-		this.autorService.actualizar(aut1);
-		this.autorService.agregar(aut2);
-		
-		
-		
-		
-		
-		
-		
+		this.matriculaService.agregar(matri);
 	
 
 	}
