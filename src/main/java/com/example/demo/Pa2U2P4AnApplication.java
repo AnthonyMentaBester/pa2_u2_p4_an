@@ -1,36 +1,22 @@
 package com.example.demo;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.example.demo.repository.modelo.Hotel;
-import com.example.demo.repository.modelo.Libro;
-import com.example.demo.repository.modelo.Materia;
-import com.example.demo.repository.modelo.Matricula;
-import com.example.demo.repository.modelo.Alumno;
-import com.example.demo.repository.modelo.Autor;
-import com.example.demo.repository.modelo.Habitacion;
-import com.example.demo.service.AutorService;
-import com.example.demo.service.HabitacionService;
-import com.example.demo.service.HotelService;
-import com.example.demo.service.LibroService;
-import com.example.demo.service.MatriculaService;
+import com.example.demo.repository.modelo.Estudiante;
+import com.example.demo.service.EstudianteService;
 
 @SpringBootApplication
 public class Pa2U2P4AnApplication implements CommandLineRunner {
 
+	
+	
 	@Autowired
-	private MatriculaService matriculaService;
-
+	private EstudianteService estudianteService;
 
 	
 
@@ -40,24 +26,32 @@ public class Pa2U2P4AnApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
+		Estudiante estu1 = new Estudiante();
+		estu1.setApellido("ferrer");
+		estu1.setCedula("17199542312");
+		estu1.setNombre("Anthony");
 		
-		List<Materia> materias = new ArrayList<>();
-		List<Alumno> alumnos = new ArrayList<>();
-		Materia mat = new Materia();
-		mat.setNombre("lenguaje");
-		materias.add(mat);
-		Alumno alum = new Alumno();
-		alum.setNombre("antohny");
-		alumnos.add(alum);
+		Estudiante estu2 = new Estudiante();
+		estu2.setApellido("ferrer");
+		estu2.setCedula("17199542312");
+		estu2.setNombre("Anthony");
 		
-		
-		Matricula matri = new Matricula();
-		matri.setFecha(LocalDate.now());
-		matri.setAlumno(alum);
-		matri.setMateria(mat);
-		matri.setNumero("001");
-		
-		this.matriculaService.agregar(matri);
+	
+	Estudiante estu = this.estudianteService.buscarPorApellido("narvaez");
+	System.out.println(estu);
+	
+	Estudiante estu4 = this.estudianteService.buscarPorApellidoNombre("narvaez","josue");
+	System.out.println(estu);
+	
+	List<Estudiante> estu3 = this.estudianteService.buscarPorListaApellido("ferrer");
+			
+	for (Estudiante estudiante : estu3) {
+		System.out.println(estudiante);
+	} 
+	
+	//typed 
+	Estudiante estu5 = this.estudianteService.buscarPorApellidoTyped("narvaez");
+	System.out.println(estu5);
 	
 
 	}
