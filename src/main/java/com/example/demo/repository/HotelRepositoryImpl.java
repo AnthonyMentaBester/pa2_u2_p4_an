@@ -38,7 +38,8 @@ public class HotelRepositoryImpl implements HotelRepository {
         // TODO Auto-generated method stub
         Hotel hotel = this.seleccionar(id);
         this.entitymanager.remove(hotel);
-    }
+        //this.entitymanager.remove(this.seleccionar(id));    
+        }
 
     
 }
