@@ -34,9 +34,9 @@ public class Pa2U2P4AnApplication implements CommandLineRunner {
 		Estudiante estu2 = new Estudiante();
 		estu2.setApellido("ferrer");
 		estu2.setCedula("17199542312");
-		estu2.setNombre("Anthony");
+		estu2.setNombre("Carlos");
 		
-	
+	/*
 	Estudiante estu = this.estudianteService.buscarPorApellido("narvaez");
 	System.out.println(estu);
 	
@@ -51,9 +51,25 @@ public class Pa2U2P4AnApplication implements CommandLineRunner {
 	
 	//typed 
 	Estudiante estu5 = this.estudianteService.buscarPorApellidoTyped("narvaez");
-	System.out.println(estu5);
+	System.out.println(estu5);*/
 	
-
+	Estudiante estu6  = this.estudianteService.buscarPorApellidoNamed("narvaez");
+	System.out.println(estu6);
+	
+	Estudiante estu7 = this.estudianteService.buscarPorApellidoNamedQuery("narvaez");
+	System.out.println(estu7);
+	
+	Estudiante estu8 = this.estudianteService.buscarPorApellidoNativeQuery("narvaez");
+	System.out.println(estu8);
+	
+	Estudiante estu9 = this.estudianteService.buscarPorApellidoNativeQueryNamed("narvaez");
+	
+	
+	Estudiante estu10 = this.estudianteService.buscarPorNombreNativeQuery("josue");
+	System.out.println(estu10);
+	
+	Estudiante estu11 = this.estudianteService.buscarPorNombreNativeQueryNamed("josue");
+	
 	}
 
 }

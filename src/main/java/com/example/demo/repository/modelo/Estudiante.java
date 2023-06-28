@@ -5,15 +5,29 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedNativeQueries;
+import jakarta.persistence.NamedNativeQuery;
+import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
-//genera la tabla 
-@Table(name = "estudiante")
-//cuando yo realizo el mapeo de un objeto pasa a ser una entidad
 @Entity
-@NamedQuery(name = "Estudiante.buscarPorApellido", query = "SELECT e FROM Estudiante e WHERE e.apellido = :datoApellido")
+@Table(name = "estudiante")
+
+@NamedQueries({
+//genera la tabla 
+
+//cuando yo realizo el mapeo de un objeto pasa a ser una entidad
+
+	@NamedQuery(name = "Estudiante.buscarPorApellido", query = "SELECT e FROM Estudiante e WHERE e.apellido = :datoApellido"),
+	@NamedQuery(name = "Estudiante.buscarPorNombre", query = "SELECT e FROM Estudiante e WHERE e.nombre = :datoNombre")
+})
+//debo poner el class por ser nativo 
+@NamedNativeQueries({
+@NamedNativeQuery(name = "Estudiante.buscarPorApellidoNative",query = "SELECT * FROM Estudiante WHERE estu_apellido = :datoApellido", resultClass =  Estudiante.class),
+@NamedNativeQuery(name = "Estudiante.buscarPorNombreNative",query = "SELECT * FROM Estudiante WHERE estu_nombre = :datoNombre", resultClass =  Estudiante.class)
+})
 public class Estudiante {
 	
 	//debo realizar un mapeo a mi columna principal 
