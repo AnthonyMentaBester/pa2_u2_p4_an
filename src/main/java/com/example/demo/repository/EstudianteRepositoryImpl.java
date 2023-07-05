@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 
+import java.nio.BufferUnderflowException;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -158,5 +159,57 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		
 		return myQueryFinal.getSingleResult();
 	}
+	@Override
+	public Estudiante seleccionarEstudianteDinamicoCriteriaQuery(String nombre, String apellido, Double peso) {
+		// TODO Auto-generated method stub
+		CriteriaBuilder myBuilder = this.entitymanager.getCriteriaBuilder();
+		CriteriaQuery<Estudiante> myCriteriaQuery = myBuilder.createQuery(Estudiante.class);
+		Root <Estudiante> myTablaFrom = myCriteriaQuery.from(Estudiante.class);
+		
+		Predicate condicionApellido = myBuilder.equal(myTablaFrom.get("apellido"), apellido);
+		//> 100 e.nombre = AND = e.apellido 
+		//< = 100 e.nombre OR                     e.apellodp 
+		Predicate pNombre  = myBuilder.equal(myTablaFrom.get("nombre"), nombre);
+		Predicate pApellido = myBuilder.equal(myTablaFrom.get("apellido"), apellido);
+		Predicate predicadorFinal = null;
+		if(peso.compareTo(Double.valueOf(100))<=0) {
+			predicadorFinal = myBuilder.or(pNombre,pApellido);
+			
+		}
+		else {
+			
+			predicadorFinal = myBuilder.and(pNombre,pApellido);
+			
+		}
+		myCriteriaQuery.select(myTablaFrom).where(predicadorFinal);
+		//5. la ejecucion ya del query lo realizamos con TypedQuery
+		TypedQuery<Estudiante> myQueryFinal= this.entitymanager.createQuery(myCriteriaQuery);
+		
+		
+		return myQueryFinal.getSingleResult();
+	}
+	@Override
+	public int eliminarPorNombre(String nombre) {
+		// TODO Auto-generated method stub
+		//Delete from Estudiante where estu_nombre = ?
+		//DELETE FROM Estudiante e WHERE e.nombre = :datoNombre
+		
+		Query myQuery = this.entitymanager.createQuery("DELETE FROM Estudiante e WHERE e.nombre = :datoNombre");
+		myQuery.setParameter("datoNombre", nombre);
+		return myQuery.executeUpdate();
+		
+	}
+	@Override
+	public int actualizarPorApellido(String nombre,String apellido) {
+		// TODO Auto-generated method stub
+	
+		//DELETE FROM Estudiante e WHERE e.nombre = :datoNombre
+		//UPDATE Estudiante e SET e.nombre = :datoNombre WHERE  e.apellido = :datoApellido		
+		Query myQuery = this.entitymanager.createQuery("UPDATE Estudiante e SET e.nombre = :datoNombre WHERE  e.apellido = :datoApellido");
+		myQuery.setParameter("datoNombre", nombre);
+		myQuery.setParameter("datoApellido", apellido);
+		return myQuery.executeUpdate();
+	}
 
 }
+   

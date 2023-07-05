@@ -101,4 +101,28 @@ public class EstudianteServiceImpl implements EstudianteService {
 		return this.estudianteRepository.seleccionarPorNombreNativeQueryNamed(nombre);
 	}
 
+	@Override
+	public Estudiante seleccionarPorApellidoCriteriaQuery(String apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepository.seleccionarPorApellidoCriteriaQuery(apellido);
+	}
+
+	@Override
+	public Estudiante buscarEstudianteDinamicoCriteriaQuery(String nombre, String apellido, Double peso) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepository.seleccionarEstudianteDinamicoCriteriaQuery(nombre, apellido, peso);
+	}
+
+	@Override
+	public int borrarPorNombre(String nombre) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepository.eliminarPorNombre(nombre);
+	}
+
+	@Override
+	public int actualizarPorApellido(String nombre, String Apellido) {
+		// TODO Auto-generated method stub
+		return this.estudianteRepository.actualizarPorApellido(nombre, Apellido);
+	}
+
 }
