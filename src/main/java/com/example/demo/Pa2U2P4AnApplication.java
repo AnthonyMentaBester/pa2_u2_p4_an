@@ -2,88 +2,74 @@ package com.example.demo;
 
 import java.util.List;
 
+import org.hibernate.engine.jdbc.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.demo.repository.modelo.Estudiante;
+import com.example.demo.repository.modelo.Habitacion;
+import com.example.demo.repository.modelo.Hotel;
+import com.example.demo.repository.modelo.dto.EstudianteDTO;
+import com.example.demo.repository.modelo.dto.MatriculaDTO;
 import com.example.demo.service.EstudianteService;
+import com.example.demo.service.HabitacionService;
+import com.example.demo.service.HotelService;
+import com.example.demo.service.MatriculaService;
 
 @SpringBootApplication
 public class Pa2U2P4AnApplication implements CommandLineRunner {
 
-	
-	
 	@Autowired
 	private EstudianteService estudianteService;
 
+	@Autowired
+	private MatriculaService matriculaService;
 	
-
+	@Autowired 
+	private HabitacionService habitacionService;
+	
+	@Autowired
+	private HotelService hotelService;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(Pa2U2P4AnApplication.class, args);
 	}
+
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		Estudiante estu1 = new Estudiante();
-		estu1.setApellido("ferrer");
+		estu1.setApellido("c");
 		estu1.setCedula("17199542312");
-		estu1.setNombre("Anthony");
-		estu1.setPeso(101.0);
-		//this.estudianteService.actualizar(estu1);
-		
+		estu1.setNombre("d");
+		estu1.setPeso(1022.00);
+		// this.estudianteService.actualizar(estu1);
+
 		Estudiante estu2 = new Estudiante();
 		estu2.setApellido("ferrer");
 		estu2.setCedula("17199542312");
 		estu2.setNombre("Carlos");
+
+		List<EstudianteDTO> reporte = this.estudianteService.buscarTodosDTO();
+		for (EstudianteDTO estudianteDTO : reporte) {
+			System.out.println(estudianteDTO);
+		}
 		
-	/*
-	Estudiante estu = this.estudianteService.buscarPorApellido("narvaez");
-	System.out.println(estu);
-	
-	Estudiante estu4 = this.estudianteService.buscarPorApellidoNombre("narvaez","josue");
-	System.out.println(estu);
-	
-	List<Estudiante> estu3 = this.estudianteService.buscarPorListaApellido("ferrer");
-			
-	for (Estudiante estudiante : estu3) {
-		System.out.println(estudiante);
-	} 
-	
-	//typed 
-	Estudiante estu5 = this.estudianteService.buscarPorApellidoTyped("narvaez");
-	System.out.println(estu5);
-	
-	Estudiante estu6  = this.estudianteService.buscarPorApellidoNamed("narvaez");
-	System.out.println(estu6);
-	
-	Estudiante estu7 = this.estudianteService.buscarPorApellidoNamedQuery("narvaez");
-	System.out.println(estu7);
-	
-	Estudiante estu8 = this.estudianteService.buscarPorApellidoNativeQuery("narvaez");
-	System.out.println(estu8);
-	
-	Estudiante estu9 = this.estudianteService.buscarPorApellidoNativeQueryNamed("narvaez");
-	
-	
-	Estudiante estu10 = this.estudianteService.buscarPorNombreNativeQuery("josue");
-	System.out.println(estu10);
-	
-	Estudiante estu11 = this.estudianteService.buscarPorNombreNativeQueryNamed("josue");*/
-	
-	//Estudiante estu12 = this.estudianteService.seleccionarPorApellidoCriteriaQuery("narvaez");
-		//Estudiante estu12 = this.estudianteService.buscarEstudianteDinamicoCriteriaQuery("josue", "narvaez", 45.00);
-		//System.out.println(estu12);
-	
-		int estu13 = this.estudianteService.borrarPorNombre("josue");
-		System.out.println(estu13);
+		List<MatriculaDTO> repo = this.matriculaService.reporteTodos();
+		for (MatriculaDTO matriculaDTO : repo) {
+			System.out.println(matriculaDTO);
+		}
+		Hotel hot = this.hotelService.buscar(1);
+		System.out.println(hot);
 		
-		int estu14 = this.estudianteService.actualizarPorApellido("carlos", "ferrer");
+		Habitacion habi = this.habitacionService.buscar(1);
 		
-		System.out.println(estu14);
-		
-		
+		System.out.println(habi);
+	
 	}
+	
+	
 
 }

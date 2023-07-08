@@ -2,6 +2,7 @@ package com.example.demo.repository;
 
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.repository.modelo.Habitacion;
 import com.example.demo.repository.modelo.Hotel;
 
 import jakarta.persistence.EntityManager;
@@ -30,7 +31,13 @@ public class HotelRepositoryImpl implements HotelRepository {
     @Override
     public Hotel seleccionar(Integer id) {
         // TODO Auto-generated method stub
-        return this.entitymanager.find(Hotel.class,id);
+    	Habitacion hot = new Habitacion();
+        hot.getHotel();
+        return this.entitymanager.find(Hotel.class,id.SIZE);
+        
+        
+        
+        
     }
 
     @Override
@@ -40,6 +47,7 @@ public class HotelRepositoryImpl implements HotelRepository {
         this.entitymanager.remove(hotel);
         //this.entitymanager.remove(this.seleccionar(id));    
         }
+
 
     
 }

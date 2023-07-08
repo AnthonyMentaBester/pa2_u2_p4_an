@@ -1,12 +1,12 @@
 package com.example.demo.repository;
 
 
-import java.nio.BufferUnderflowException;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.repository.modelo.Estudiante;
+import com.example.demo.repository.modelo.dto.EstudianteDTO;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -209,6 +209,13 @@ public class EstudianteRepositoryImpl implements EstudianteRepository {
 		myQuery.setParameter("datoNombre", nombre);
 		myQuery.setParameter("datoApellido", apellido);
 		return myQuery.executeUpdate();
+	}
+	@Override
+	public List<EstudianteDTO> seleccionarTodosDTO() {
+		// TODO Auto-generated method stub
+		//USAR UN TYPED QUERY
+		TypedQuery<EstudianteDTO> myQuery = this.entitymanager.createQuery("SELECT NEW com.example.demo.repository.modelo.dto.EstudianteDTO(e.nombre,e.apellido) FROM Estudiante e",EstudianteDTO.class);
+		return myQuery.getResultList();
 	}
 
 }

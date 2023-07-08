@@ -15,6 +15,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "hotel")
 public class Hotel {
+	@Override
+	public String toString() {
+		return "Hotel [nombre=" + nombre + "]";
+	}
 	@GeneratedValue(generator = "seq_hotel", strategy = GenerationType.SEQUENCE ) /// atributo quue permite hacer match
 	@SequenceGenerator(name = "seq_hotel", sequenceName = "seq_hotel", allocationSize = 1)
 	
